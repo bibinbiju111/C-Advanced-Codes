@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+	char (*p)[4]; // p is pointer to sequential 1d arrays of len 4 chars
+	int rows, i;
+
+	//inputting no of rows
+	printf("enter no of rows\n");
+	scanf("%d", &rows);
+
+	//allocating dynamic memory for the rows
+	p = (char (*)[4]) malloc(rows*4*sizeof(char));
+	if(p == NULL) {
+		printf("malloc failed\n");
+		return -1;
+	}
+	printf("memory allocated for %d rows  in heap\n", rows);
+
+	//inputting user data into the dynamic memory
+	
+	for(i = 0; i<rows; i++) {
+		printf("enter input data %d row \n", i);
+		scanf("%s", *(p+i));
+	}
+
+	//printing 1th row 2nd col
+	printf("%c\n", *(*(p+1)+2));
+	printf("%c\n", p[1][2]);
+
+	//outputing user entered data
+	for(i = 0; i<rows; i++) {
+		printf("enter inputed data for %d row is %s \n", i, *(p+i));
+	}
+
+	//free the dynamic memory
+	free(p);
+	printf("dynamic memory allotted for p is freed\n");
+
+
+	return 0;
+}
